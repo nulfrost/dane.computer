@@ -1,0 +1,29 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+import Navbar from "../components/Navbar.astro";
+import Meta from "../components/Meta.astro";
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="font-sans" dir="ltr">
+  <Meta title={title} description={description} />
+  <body class="bg-snes-light-gray">
+    <Navbar />
+    <main class="max-w-5xl px-3 mx-auto xl:px-0" id="maincontent">
+      <h1 class="mt-4 mb-1 text-2xl font-bold text-snes-black">
+        {title}
+      </h1>
+      <p class="mb-4 text-sm">{description}</p>
+      <div
+        class="pb-6 prose prose-h2:mb-1 prose-a:text-blue-700 hover:prose-a:text-blue-600 prose-h2:mt-7 prose-p:text-gray-700 prose-li:marker:text-snes-black !max-w-none"
+      >
+        <slot />
+      </div>
+    </main>
+  </body>
+</html>

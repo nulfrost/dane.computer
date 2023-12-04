@@ -1,0 +1,21 @@
+{
+  "name": "danethe.dev-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "latest",
+    "@astrojs/tailwind": "latest",
+    "@fontsource-variable/asap": "^5.0.9",
+    "@notionhq/client": "^2.2.10",
+    "@tailwindcss/typography": "^0.5.9",
+    "astro": "latest",
+    "tailwindcss": "^3.3.3"
+  }
+}

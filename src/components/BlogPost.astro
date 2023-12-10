@@ -15,13 +15,9 @@ const { title, published_at, slug } = Astro.props;
     >
       <a href={`/blogs/${slug}`}>{title}</a>
     </h2>
-    <footer class="text-sm">
+    <footer class="text-sm text-gray-500">
       <time datetime={published_at.toISOString()}>
-        {
-          new Intl.DateTimeFormat("en-us", {
-            dateStyle: "full",
-          }).format(new Date(published_at))
-        }
+        {new Intl.DateTimeFormat("en-us", {}).format(new Date(published_at))}
       </time>
     </footer>
   </article>

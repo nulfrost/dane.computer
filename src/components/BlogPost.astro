@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { title, published_at, slug } = Astro.props;
+import Link from "../components/Link.astro";
 ---
 
 <li>
@@ -13,11 +14,11 @@ const { title, published_at, slug } = Astro.props;
     <h2
       class="mb-1 font-bold text-blue-700 hover:text-blue-500 hover:underline"
     >
-      <a href={`/blogs/${slug}`}>{title}</a>
+      <Link href={`/blogs/${slug}`}>{title}</Link>
     </h2>
     <footer class="text-sm text-gray-500">
       <time datetime={published_at.toISOString()}>
-        {new Intl.DateTimeFormat("en-us", {}).format(new Date(published_at))}
+        {new Intl.DateTimeFormat("en-us").format(new Date(published_at))}
       </time>
     </footer>
   </article>

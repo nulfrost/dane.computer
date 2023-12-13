@@ -1,0 +1,13 @@
+---
+interface Props {
+  extraClasses?: string;
+  [x: string]: unknown;
+}
+---
+
+<a
+  {...Astro.props}
+  class={`text-blue-700 hover:(underline text-blue-600) focus-visible:(outline outline-[4px] outline-black underline [box-shadow:0_0_0_6px_white]) ${Astro.props.extraClasses}`}
+>
+  <slot />
+</a>

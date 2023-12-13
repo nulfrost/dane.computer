@@ -3,6 +3,7 @@ const paths = [
   { name: "home", path: "/" },
   { name: "blogs", path: "/blogs" },
 ];
+import Link from "../components/Link.astro";
 ---
 
 <header class="max-w-5xl mx-auto pt-2 md:pt-10 mb-2 px-3 md:px-0">
@@ -11,12 +12,9 @@ const paths = [
       {
         paths.map(({ name, path }) => (
           <li>
-            <a
-              href={path}
-              class="font-bold text-blue-600 hover:(text-blue-500 underline)"
-            >
+            <Link href={path} extraClasses="font-bold">
               {name}
-            </a>{" "}
+            </Link>{" "}
           </li>
         ))
       }

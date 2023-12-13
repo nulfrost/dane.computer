@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import daneImage from "../images/dane.png";
 import Layout from "../layouts/Layout.astro";
+import Link from "../components/Link.astro";
 
 import { getCollection } from "astro:content";
 
@@ -40,12 +41,12 @@ const posts = (await getCollection("blog"))
             <li class="mb-2">
               <p class="mb-0 max-w-[60ch]">
                 {post.data.title}
-                <a
+                <Link
                   href={`/blogs/${post.slug}`}
-                  class="text-sm text-blue-700 font-bold hover:(underline text-blue-500)"
+                  extraClasses="text-sm font-bold ml-1"
                 >
                   (view more)
-                </a>
+                </Link>
               </p>
               <span class="text-gray-500 text-sm">
                 posted on{" "}
@@ -59,11 +60,7 @@ const posts = (await getCollection("blog"))
           ))
         }
       </ul>
-      <a
-        href="/blogs"
-        class="text-blue-700 font-bold hover:(text-blue-600 underline)"
-        >View All Blog Entries</a
-      >
+      <Link href="/blogs" extraClasses="font-bold">View All Blog Entries</Link>
     </div>
   </div>
   <div class="grid xl:grid-cols-2">
@@ -74,29 +71,29 @@ const posts = (await getCollection("blog"))
       <ul class="px-2 py-0.5">
         <li class="flex items-center gap-1">
           <div class="i-lucide-mailbox"></div>
-          <a
-            href="mailto:khadane.miller@gmail.com?subject=Hey%20There"
-            class="text-blue-700 hover:(underline text-blue-600)"
-            >Send Message</a
-          >
+          <Link href="mailto:khadane.miller@gmail.com?subject=Hey%20There">
+            Send Message
+          </Link>
         </li>
         <li class="flex items-center gap-1">
           <div class="i-lucide-square-user"></div>
-          <a
+          <Link
             href="https://www.linkedin.com/in/dmiller94/"
             target="_blank"
-            class="text-blue-700 hover:(underline text-blue-600)"
-            rel="noopener noreferrer">Add on LinkedIn</a
+            rel="noopener noreferrer"
           >
+            Add on LinkedIn
+          </Link>
         </li>
         <li class="flex items-center gap-1">
           <div class="i-lucide-at-sign"></div>
-          <a
+          <Link
             href="https://www.threads.net/@dane__m"
             target="_blank"
-            class="text-blue-700 hover:(underline text-blue-600)"
-            rel="noopener noreferrer">Follow on Threads</a
+            rel="noopener noreferrer"
           >
+            Follow on Threads
+          </Link>
         </li>
       </ul>
     </div>

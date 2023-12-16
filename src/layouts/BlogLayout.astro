@@ -15,13 +15,11 @@ const { title, description } = Astro.props;
   <body>
     <Navbar />
     <main class="max-w-5xl px-3 mx-auto xl:px-0" id="maincontent">
-      <h1 class="mt-4 mb-1 text-2xl font-bold">
+      <h1 class="mt-4 mb-1 text-4xl font-bold">
         {title}
       </h1>
-      <p class="mb-4 text-sm text-gray-500">{description}</p>
-      <div
-        class="pb-6 prose prose-h2:mb-1 prose-a:text-blue-700 hover:prose-a:text-blue-600 prose-h2:mt-7 prose-p:text-gray-700 prose-li:marker:text-snes-black !max-w-none"
-      >
+      <p class="mb-4 text-gray-500">{description}</p>
+      <div class="pb-6 prose max-w-none">
         <slot />
       </div>
     </main>

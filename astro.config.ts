@@ -13,4 +13,9 @@ export default defineConfig({
     }),
     sitemap(),
   ],
+  markdown: {
+    shikiConfig: {
+      theme: "material-theme-palenight",
+    },
+  },
 });

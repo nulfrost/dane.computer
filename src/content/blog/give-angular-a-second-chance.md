@@ -1,5 +1,5 @@
 ---
-title: Angular deserves respect
+title: Give Angular a second chance
 description: Giving Angular an honest try with Angular 17
 year: 2023
 published_at: 2023-12-15

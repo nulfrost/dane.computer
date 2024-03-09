@@ -252,4 +252,4 @@ And with that you have fully functioning authentication!
 
 ## Conclusion
 
-This is all that is needed to set up authentication, you can explore the other authentication methods if you choose to do so. I have a repository set up with Github authentication that can be used as a starting point [which can be found here](https://github.com/nulfrost/supabase-remix-ssr).
+This is all that is needed to set up authentication, you can explore the other authentication methods if you choose to do so. I have a [repository set up with Github authentication](https://github.com/nulfrost/supabase-remix-ssr) as well as a [live example of supabase auth in action](https://supabase-ssr-remix.vercel.app/).

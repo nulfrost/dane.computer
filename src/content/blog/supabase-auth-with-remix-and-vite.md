@@ -1,6 +1,6 @@
 ---
-title: Supabase Auth with Remix + Vite
-description: Get up and running with Remix, Vite and the new Supabase SSR package
+title: Add authentication to your Remix application with Supabase
+description: Adding authentication to your remix app with Supabase has never been easier, this blog post will show you how to get up and running quickly
 year: 2024
 published_at: 2024-03-08
 ---

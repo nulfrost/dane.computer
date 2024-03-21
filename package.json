@@ -22,6 +22,7 @@
   "devDependencies": {
     "@iconify-json/lucide": "^1.1.172",
     "@unocss/reset": "^0.58.5",
+    "detect-libc": "^2.0.3",
     "unocss": "^0.58.5"
   }
 }

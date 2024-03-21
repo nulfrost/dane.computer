@@ -1,6 +1,6 @@
 ---
-title: Give Angular a second chance
-description: Giving Angular an honest try with Angular 17
+title: Why I think Developers should give Angular 17 a serious try
+description: If you're a developer that is new to Angular and its ecosystem, you should definitely take a minute to try their latest release
 year: 2023
 published_at: 2023-12-15
 ---

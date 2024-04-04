@@ -12,7 +12,7 @@ With Supabase now fully supporting doing authentication completely server-side, 
 This guide should also work for non-vite Remix projects but my preference is to use vite so we'll use a clean vite template.
 
 ```bash
-npx create-remix@latest --template remix-run/remix/templates/vite
+npx create-remix@latest
 ```
 
 Run this command in your terminal and follow the prompts, then open your new project in your editor of choice. You'll also need to [create a new project in supabase](https://supabase.com/) so that we can get access to the environment variables for this example.
@@ -61,7 +61,7 @@ export function createClient(request: Request) {
           headers.append("Set-Cookie", serialize(key, "", options));
         },
       },
-    }
+    },
   );
 
   return {

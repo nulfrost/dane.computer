@@ -1,0 +1,108 @@
+---
+title: Type-safe environment variables in your Remix application using t3-env
+description: Quickly and easily add type-safety and runtime validation to your environment variables using the t3-env package.
+year: 2024
+published_at: 2024-04-05
+---
+
+There are many was you can get type-safe variables in your projects, I've tried a few but recently found the t3-env package which makes it even easier and comes with some nice features as well. I will quickly walk through how to set this up in a Remix project.
+
+## Install t3-env
+
+As of writing this, currently you can't just bring in any validation library so you will need to install `zod` as well.
+
+```bash
+npm install @t3-oss/env-core zod
+```
+
+## Create a new `env.server.ts` file
+
+Inside of the `/app` directory, create a file named `env.server.ts` and add the following code:
+
+```typescript
+// app/env.server.ts
+
+import { createEnv } from "@t3-oss/env-core";
+import { z } from "zod";
+
+export const env = createEnv({
+  server: {
+    DATABASE_URL: z.string().url(),
+    // whatever else you may need
+  },
+});
+```
+
+Then, to access the environment variables in your loaders or actions or anywhere you might need them, you would just need to import the `env` object and use it like this:
+
+```typescript
+import { env } from "~/env.server";
+
+export async function loader() {
+  const dbUrl = env.server.DATABASE_URL;
+  // do something with the dbUrl
+}
+```
+
+This is enough to get type-safety for your environment variables, but we can go even further.
+
+If you want to add runtime validation you just need to add a single property:
+
+```typescript
+export const env = createEnv({
+  // ...
+  runtimeEnv: process.env,
+});
+```
+
+and then you'll need to import the `env.server.ts` file into the `entry.server.tsx` file like so:
+
+```diff
+// app/entry.server.tsx
+
+import { PassThrough } from "node:stream";
+
+import type { AppLoadContext, EntryContext } from "@remix-run/node";
+import { createReadableStreamFromReadable } from "@remix-run/node";
+import { RemixServer } from "@remix-run/react";
+import { isbot } from "isbot";
+import { renderToPipeableStream } from "react-dom/server";
++ import "~/env.server.ts";
+
+```
+
+On top of that, if you want to override the default error handler, you can do so like this:
+
+```typescript
+export const env = createEnv({
+  onValidationError: (error) => {
+    throw new Error(
+      `Invalid environment configuration, missing the following variables: ${error.errors.map((error) => error.path[0]).join(", ")}`,
+    );
+  },
+  // ...
+});
+```
+
+Putting that all together you should end up with a file that looks like this:
+
+```typescript
+// app/env.server.ts
+
+import { createEnv } from "@t3-oss/env-core";
+import { z } from "zod";
+
+export const env = createEnv({
+  onValidationError: (error) => {
+    throw new Error(
+      `Invalid environment configuration, missing the following variables: ${error.errors.map((error) => error.path[0]).join(", ")}`,
+    );
+  },
+  server: {
+    DATABASE_URL: z.string().url(),
+  },
+  runtimeEnv: process.env,
+});
+```
+
+If you want to see all of the features available in the t3-env package, I recommend checking out [the official documentation](https://env.t3.gg/docs/introduction).

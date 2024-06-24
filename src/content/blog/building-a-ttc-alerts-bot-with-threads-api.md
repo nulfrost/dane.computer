@@ -1,0 +1,38 @@
+---
+title: Building a TTC service alert bot with the Threads API and TTC Live Alerts API
+description: Going into detail about how I built a bot to report service updates for the TTC
+year: 2024
+published_at: 2024-06-23
+---
+
+The Threads team at Meta finally released an API to interact with the Threads platform. I've had this idea of creating a bot account that posts updates about the TTC since the API was announced. I'm happy to announce that I've "finished" this project today. In this post I'll talk about how I built it and how I found and figured out how the TTC alerts API worked.
+
+I've been using Threads since it was released last year. It's a great platform, I like it very much. I feel like I have a voice on Threads and I've been way more active on there than I ever have been on Twitter. The Threads team have also been releasing features like crazy lately and I think come either the end of this year or the beginning of next year, they'll have either caught up or surpassed Twitter in terms of useful features. Anyways, kudos to them and I'm excited to see where the platform goes. Now, let's talk about the good stuff.
+
+With the release of the Threads API I got straight to work. I wanted to build a bot that posted service updates about the TTC. There is already an official account that does this on Twitter and I wanted to replicate that on Threads. The only downside initially was that I had no idea how they were pulling those updates and the TTC does not have a public API. Luckily, these updates are also posted on the TTC website so I figured I might find some clues there.
+
+Sure enough, with very minimal effort, I found the endpoint for the live service updates inside of the browser devtools network tab.
+![Inspecting the network tab in the browser devtools to find the API endpoint](https://i.ibb.co/KxTDsYT/Screenshot-2024-06-23-at-9-19-49-PM.png)
+
+Next, I went to the endpoint URL in the browser and compared it against what was being posted on Twitter. Whenever the Twitter account posted I would refresh API endpoint page and it would match with the Twitter account. "Of course, so easy", I thought to myself as I started to create the github repo and start coding. For this project I went with Cloudflare Workers, Cloudflare KV and TypeScript. Initially I wasn't sure how often I should be running the cron job so I just started with 5 minutes as that seemed reasonable.
+
+After a couple of hours of coding away and waiting for my new Threads account to become unblocked by the spam protection by Meta, I had something working. Well until I noticed a bug. My bot would not create posts when there was an update for an alert. For example, say the 505 Streetcar went out of service, it's an entirely new alert so my bot picks it up and posts it. Now if there was an update for that alert my bot would not post it at all while the one on Twitter would. Initially I thought it was because the Twitter account used a different source for posting updates and the live alerts endpoint wasn't getting updated but that wasn't it at all. Here's where I lost a couple days to figuring out how this live alerts endpoint worked.
+
+The TTC live alerts endpoint works like this:
+
+- Whenever the `lastUpdated` field from the API is updated to a NEW time, it means there's NEW alerts.
+- Whenever a specific alert or alerts are updated, the `lastUpdated` changes but it's changed to whatever the timestamp was when the initial alert was updated. So this could be a timestamp in the past.
+
+> Ex. NEW alert timestamp saved with '2024-06-24T01:57:45.606Z', another NEW update saved with '2024-06-24T01:58:30.100Z'. A content only update to a previous alert changes the `lastUpdated` back to '2024-06-24T01:57:45.606Z' in the API and because I was comparing the data in my cache with the key of '2024-06-24T01:57:45.606Z' versus what was being returned from the API with `lastUpdated` as this value '2024-06-24T01:57:45.606Z', the IDs would be the exact same. The content however was different.
+
+Initially I was just checking the cache with the key being whatever the `lastUpdated` was at the time of fetching the data from the API. All good and dandy except when the second situation from above happened, it meant I was comparing a previously saved list of alerts versus whatever was coming back from the API. Which because it was using a `lastUpdated` timestamp that already existed, just comparing based on the IDs wouldn't work. Whenever there are content updates there are no NEW ids, the same ID for an alert is reused and the content is updated. I had to ALSO check the content to see if any of them have changed. It was simple enough, I just copied the logic for checking for new IDs but applied it to check for new content based on the alert titles.
+
+After figuring that out, here's how the logic for checking for new posts shakes out:
+
+1. Every minute (I changed it so it'd be faster) fetch data from the TTC live alerts API
+2. Check the data fetched from the API against the most recently cached data (Cloudflare KV)
+3. Are there NEW ids in the data versus what's stored in the cached? If yes, these are completely new alerts, post them and add a new entry to the cache.
+4. If not, check to see if there are any content changes based on the alert titles against the cached data.
+5. If there are content changes, it means there was an update and we should post them and update the cache. If not, stop there there's nothing to do.
+
+It actually sounds much simpler after typing it out but figuring out how it worked required me to wait for updates to the API and run tests to verify my thought process which took a bit a time. Overall it was a fun experience and I enjoyed working backwards to figure this all out. I hope this motivates the TTC to start posting updates on Threads as well but we'll see. If you live in Toronto and want TTC service updates on threads, give @ttcserviceupdates a follow!

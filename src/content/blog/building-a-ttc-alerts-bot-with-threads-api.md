@@ -1,6 +1,6 @@
 ---
 title: Building a TTC service alert bot with the Threads API and TTC Live Alerts API
-description: Going into detail about how I built a bot to report service updates for the TTC
+description: Going into detail about how I built a bot to report service updates for the TTC on Threads
 year: 2024
 published_at: 2024-06-23
 ---

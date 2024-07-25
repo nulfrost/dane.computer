@@ -11,18 +11,17 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "latest",
-    "@notionhq/client": "^2.2.14",
-    "@tailwindcss/typography": "^0.5.10",
+    "@notionhq/client": "^2.2.15",
     "astro": "latest",
-    "sharp": "^0.33.2"
+    "sharp": "^0.33.4"
   },
   "trustedDependencies": [
     "sharp"
   ],
   "devDependencies": {
-    "@iconify-json/lucide": "^1.1.172",
-    "@unocss/reset": "^0.58.5",
+    "@iconify-json/lucide": "^1.1.202",
+    "@unocss/reset": "^0.61.5",
     "detect-libc": "^2.0.3",
-    "unocss": "^0.58.5"
+    "unocss": "^0.61.5"
   }
 }

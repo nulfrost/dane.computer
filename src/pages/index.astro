@@ -7,113 +7,123 @@ import Link from "../components/Link.astro";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("blog"))
-  .sort((a, b) => b.data.published_at.valueOf() - a.data.published_at.valueOf())
-  .slice(0, 4);
+    .sort(
+        (a, b) => b.data.published_at.valueOf() - a.data.published_at.valueOf(),
+    )
+    .slice(0, 4);
 ---
 
 <Layout
-  title="Dane's Space | Home"
-  description="Hey, I'm Dane. A frontend/fullstack developer from Toronto that enjoys building cool and accessible websites using the latest web technologies."
+    title="Dane's Space | Home"
+    description="Hey, I'm Dane. A frontend/fullstack developer from Toronto that enjoys building cool and accessible websites using the latest web technologies."
 >
-  <h1 class="text-2xl font-bold mb-4">Dane</h1>
-  <div class="mb-4 grid xl:grid-cols-2 gap-4">
-    <div>
-      <div>
-        <Image
-          src={daneImage}
-          alt="Dane staring down at his camera while on a boat"
-          format="avif"
-          quality={80}
-          class="h-full w-sm rounded-sm border border-gray-300 mb-2"
-        />
-      </div>
-      <div>
-        <p>He/They</p>
-        <p>29 years old</p>
-        <p>Toronto, ONTARIO, Canada</p>
-      </div>
+    <h1 class="text-2xl font-bold mb-4">Dane</h1>
+    <div class="mb-4 grid xl:grid-cols-2 gap-4">
+        <div>
+            <div>
+                <Image
+                    src={daneImage}
+                    alt="Dane staring down at his camera while on a boat"
+                    format="avif"
+                    quality={80}
+                    class="h-full w-sm rounded-lg border border-gray-300 mb-2"
+                />
+            </div>
+            <div>
+                <p>He/They</p>
+                <p>29 years old</p>
+                <p>Toronto, ONTARIO, Canada</p>
+            </div>
+        </div>
+        <div>
+            <h2 class="font-bold mb-1">Dane&apos;s latest blog entires</h2>
+            <ul>
+                {
+                    posts.map((post) => (
+                        <li class="mb-2">
+                            <p class="mb-0 max-w-[60ch]">
+                                {post.data.title}
+                                <Link
+                                    href={`/blogs/${post.slug}`}
+                                    extraClasses="text-sm font-bold ml-1"
+                                >
+                                    (view more)
+                                </Link>
+                            </p>
+                            <span class="text-gray-500 text-sm">
+                                posted on{" "}
+                                <time
+                                    datetime={post.data.published_at.toISOString()}
+                                >
+                                    {new Intl.DateTimeFormat("en-US").format(
+                                        new Date(post.data.published_at),
+                                    )}
+                                </time>
+                            </span>
+                        </li>
+                    ))
+                }
+            </ul>
+            <Link href="/blogs" extraClasses="font-bold"
+                >View All Blog Entries</Link
+            >
+        </div>
     </div>
-    <div>
-      <h2 class="font-bold mb-1">Dane&apos;s latest blog entires</h2>
-      <ul>
-        {
-          posts.map((post) => (
-            <li class="mb-2">
-              <p class="mb-0 max-w-[60ch]">
-                {post.data.title}
-                <Link
-                  href={`/blogs/${post.slug}`}
-                  extraClasses="text-sm font-bold ml-1"
-                >
-                  (view more)
-                </Link>
-              </p>
-              <span class="text-gray-500 text-sm">
-                posted on{" "}
-                <time datetime={post.data.published_at.toISOString()}>
-                  {new Intl.DateTimeFormat("en-US").format(
-                    new Date(post.data.published_at)
-                  )}
-                </time>
-              </span>
-            </li>
-          ))
-        }
-      </ul>
-      <Link href="/blogs" extraClasses="font-bold">View All Blog Entries</Link>
+    <div class="grid xl:grid-cols-2">
+        <div class="border-2 border-blue-400 xl:w-[400px] h-min mb-4 xl:mb-0">
+            <h2 class="bg-blue-400 font-bold text-white px-2 py-0.5">
+                Contacting Dane
+            </h2>
+            <ul class="px-2 py-0.5">
+                <li class="flex items-center gap-1">
+                    <div class="i-lucide-mailbox"></div>
+                    <Link
+                        href="mailto:khadane.miller@gmail.com?subject=Hey%20There"
+                    >
+                        Send Message
+                    </Link>
+                </li>
+                <li class="flex items-center gap-1">
+                    <div class="i-lucide-square-user"></div>
+                    <Link
+                        href="https://www.linkedin.com/in/dmiller94/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Add on LinkedIn
+                    </Link>
+                </li>
+                <li class="flex items-center gap-1">
+                    <div class="i-lucide-at-sign"></div>
+                    <Link
+                        href="https://www.threads.net/@dane__m"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Follow on Threads
+                    </Link>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2
+                class="bg-orange-200 font-bold text-orange-500 px-2 py-0.5 mb-2"
+            >
+                Dane's Blurbs
+            </h2>
+            <h3 class="text-orange-500 font-bold">About me:</h3>
+            <p class="mb-4">
+                I'm a developer from Toronto interested in making <i>cool</i> and
+                <span class="font-bold">accessible</span> websites for everyone.
+            </p>
+            <p>
+                I got my start in programming through video games and just being
+                very curious about how things worked. Eventually that turned in
+                to developing websites which I am still doing today but I have
+                interests in other areas such as DevOps and Game Development. I
+                also try to blog about things I've learned when I remember to do
+                so.
+            </p>
+        </div>
     </div>
-  </div>
-  <div class="grid xl:grid-cols-2">
-    <div class="border-2 border-blue-400 xl:w-[400px] h-min mb-4 xl:mb-0">
-      <h2 class="bg-blue-400 font-bold text-white px-2 py-0.5">
-        Contacting Dane
-      </h2>
-      <ul class="px-2 py-0.5">
-        <li class="flex items-center gap-1">
-          <div class="i-lucide-mailbox"></div>
-          <Link href="mailto:khadane.miller@gmail.com?subject=Hey%20There">
-            Send Message
-          </Link>
-        </li>
-        <li class="flex items-center gap-1">
-          <div class="i-lucide-square-user"></div>
-          <Link
-            href="https://www.linkedin.com/in/dmiller94/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Add on LinkedIn
-          </Link>
-        </li>
-        <li class="flex items-center gap-1">
-          <div class="i-lucide-at-sign"></div>
-          <Link
-            href="https://www.threads.net/@dane__m"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Follow on Threads
-          </Link>
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2 class="bg-orange-200 font-bold text-orange-500 px-2 py-0.5 mb-2">
-        Dane's Blurbs
-      </h2>
-      <h3 class="text-orange-500 font-bold">About me:</h3>
-      <p class="mb-4">
-        I'm a developer from Toronto interested in making <i>cool</i> and <span
-          class="font-bold">accessible</span
-        > websites for everyone.
-      </p>
-      <p>
-        I got my start in programming through video games and just being very
-        curious about how things worked. Eventually that turned in to developing
-        websites which I am still doing today but I have interests in other
-        areas such as DevOps and Game Development. I also try to blog about
-        things I've learned when I remember to do so.
-      </p>
-    </div>
-  </div>
 </Layout>

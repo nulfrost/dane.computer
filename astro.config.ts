@@ -14,8 +14,20 @@ export default defineConfig({
     sitemap(),
   ],
   markdown: {
+    syntaxHighlight: "shiki",
     shikiConfig: {
-      theme: "material-theme-palenight",
+      theme: "solarized-light",
+      transformers: [
+        {
+          preprocess(code) {
+            if (code.endsWith("\n")) {
+              code = code.slice(0, -1);
+            }
+
+            return code;
+          },
+        },
+      ],
     },
   },
 });

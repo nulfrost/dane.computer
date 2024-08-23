@@ -68,7 +68,6 @@ import { RemixServer } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
 + import "~/env.server.ts";
-
 ```
 
 On top of that, if you want to override the default error handler, you can do so like this:

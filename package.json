@@ -13,15 +13,15 @@
     "@astrojs/sitemap": "latest",
     "@notionhq/client": "^2.2.15",
     "astro": "latest",
-    "sharp": "^0.33.4"
+    "sharp": "^0.33.5"
   },
   "trustedDependencies": [
     "sharp"
   ],
   "devDependencies": {
-    "@iconify-json/lucide": "^1.1.202",
-    "@unocss/reset": "^0.61.5",
+    "@iconify-json/lucide": "^1.1.208",
+    "@unocss/reset": "^0.62.2",
     "detect-libc": "^2.0.3",
-    "unocss": "^0.61.5"
+    "unocss": "^0.62.2"
   }
 }

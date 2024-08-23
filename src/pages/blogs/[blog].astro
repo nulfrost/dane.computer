@@ -3,11 +3,11 @@ import BlogLayout from "../../layouts/BlogLayout.astro";
 import { type CollectionEntry, getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  return posts.map((post) => ({
-    params: { blog: post.slug },
-    props: post,
-  }));
+    const posts = await getCollection("blog");
+    return posts.map((post) => ({
+        params: { blog: post.slug },
+        props: post,
+    }));
 }
 
 type Props = CollectionEntry<"blog">;
@@ -16,5 +16,26 @@ const { Content } = await post.render();
 ---
 
 <BlogLayout {...post.data}>
-  <Content />
+    <Content />
 </BlogLayout>
+
+<style is:global>
+    code {
+        counter-reset: step;
+        counter-increment: step 0;
+    }
+
+    code .line::before {
+        content: counter(step);
+        counter-increment: step;
+        width: 1rem;
+        margin-right: 1.5rem;
+        display: inline-block;
+        text-align: right;
+        color: rgba(115, 138, 148, 0.2);
+    }
+
+    pre:hover .line::before {
+        color: rgba(115, 138, 148, 0.5);
+    }
+</style>

@@ -10,9 +10,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/mdx": "^3.1.4",
     "@astrojs/sitemap": "latest",
     "@notionhq/client": "^2.2.15",
-    "astro": "latest",
+    "astro": "^4.14.5",
     "sharp": "^0.33.5"
   },
   "trustedDependencies": [

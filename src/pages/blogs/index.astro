@@ -4,24 +4,24 @@ import BlogPost from "../../components/BlogPost.astro";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.published_at.valueOf() - a.data.published_at.valueOf()
+    (a, b) => b.data.published_at.valueOf() - a.data.published_at.valueOf(),
 );
 ---
 
 <Layout
-  title="Dane's Space | Blog"
-  description="Where I write about things I've learned or found interesting"
+    title="Dane's Space | Blog"
+    description="Where I write about things I've learned or found interesting"
 >
-  <h1 class="mt-4 mb-4 text-2xl font-bold text-snes-black">Blog</h1>
-  <ul class="space-y-4">
-    {
-      posts.map((post) => (
-        <BlogPost
-          title={post.data.title}
-          slug={post.slug}
-          published_at={post.data.published_at}
-        />
-      ))
-    }
-  </ul>
+    <h1 class="mt-4 mb-4 text-2xl font-bold text-snes-black">Blog</h1>
+    <ul class="space-y-4">
+        {
+            posts.map((post) => (
+                <BlogPost
+                    title={post.data.title}
+                    slug={post.id}
+                    published_at={post.data.published_at}
+                />
+            ))
+        }
+    </ul>
 </Layout>

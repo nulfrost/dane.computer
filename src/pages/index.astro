@@ -44,7 +44,7 @@ const posts = (await getCollection("blog"))
                             <p class="mb-0 max-w-[60ch]">
                                 {post.data.title}
                                 <Link
-                                    href={`/blogs/${post.slug}`}
+                                    href={`/blogs/${post.id}`}
                                     extraClasses="text-sm font-bold ml-1"
                                 >
                                     (view more)

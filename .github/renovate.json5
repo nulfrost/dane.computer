@@ -17,9 +17,8 @@
         "minor",
         "lockFileMaintenance",
       ],
-      autoMerge: true,
       dependencyDashboardApproval: false,
-      minimumReleaseAge: 0,
+      minimumReleaseAge: "0",
     },
   ],
 }

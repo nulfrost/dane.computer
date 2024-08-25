@@ -1,5 +1,5 @@
 ---
-import BlogLayout from "../../layouts/BlogLayout.astro";
+import BlogLayout from "@layouts/BlogLayout.astro";
 import {
     type CollectionEntry,
     getCollection,
@@ -22,12 +22,40 @@ const post = await getEntry("blog", Astro.params.blog);
 const { Content } = await render(post);
 ---
 
+<script>
+    const codeBlock = document.querySelectorAll("pre");
+    const copyButton = document.createElement("button");
+    copyButton.textContent = "Copy code to clipboard";
+    codeBlock.forEach((block) => {
+        block?.parentNode?.insertBefore(copyButton.cloneNode(true), block);
+    });
+
+    const copyButtons = document.querySelectorAll("button");
+
+    copyButtons.forEach((button) => {
+        button.addEventListener("click", (event) => {
+            // @ts-ignore
+            const code = event.target.nextElementSibling.textContent;
+            setTimeout(() => {
+                // @ts-ignore
+                event.target.textContent = "Copied!";
+                setTimeout(() => {
+                    // @ts-ignore
+                    event.target.textContent = "Copy code to clipboard";
+                }, 2000);
+            }, 0);
+            navigator.clipboard.writeText(code);
+        });
+    });
+</script>
+
 <BlogLayout {...post!.data}>
     <Content />
 </BlogLayout>
 
 <style is:global>
     code {
+        position: relative;
         counter-reset: step;
         counter-increment: step 0;
     }
@@ -44,5 +72,11 @@ const { Content } = await render(post);
 
     pre:hover .line::before {
         color: rgba(115, 138, 148, 0.5);
+    }
+
+    button {
+        font-size: 0.8rem;
+        text-align: right;
+        width: 100%;
     }
 </style>

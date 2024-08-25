@@ -1,23 +1,23 @@
 ---
 const paths = [
-  { name: "home", path: "/" },
-  { name: "blogs", path: "/blogs" },
+    { name: "home", path: "/" },
+    { name: "blogs", path: "/blogs" },
 ];
-import Link from "../components/Link.astro";
+import Link from "@components/Link.astro";
 ---
 
 <header class="max-w-5xl mx-auto pt-2 md:pt-10 mb-2 px-3 md:px-0">
-  <nav>
-    <ul class="flex gap-2">
-      {
-        paths.map(({ name, path }) => (
-          <li>
-            <Link href={path} extraClasses="font-bold">
-              {name}
-            </Link>{" "}
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
+    <nav>
+        <ul class="flex gap-2">
+            {
+                paths.map(({ name, path }) => (
+                    <li>
+                        <Link href={path} extraClasses="font-bold">
+                            {name}
+                        </Link>{" "}
+                    </li>
+                ))
+            }
+        </ul>
+    </nav>
 </header>

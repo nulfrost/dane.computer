@@ -1,9 +1,9 @@
 ---
-import Meta from "../components/Meta.astro";
-import Navbar from "../components/Navbar.astro";
+import Meta from "@components/Meta.astro";
+import Navbar from "@components/Navbar.astro";
 interface Props {
-  title: string;
-  description: string;
+    title: string;
+    description: string;
 }
 
 const { title, description } = Astro.props;
@@ -11,11 +11,14 @@ const { title, description } = Astro.props;
 
 <!doctype html>
 <html lang="en" class="font-sans" dir="ltr">
-  <Meta title={title} description={description} />
-  <body class="bg-snes-light-gray">
-    <Navbar />
-    <main class="max-w-5xl px-3 mx-auto xl:px-0 pb-5 md:pb-0" id="maincontent">
-      <slot />
-    </main>
-  </body>
+    <Meta title={title} description={description} />
+    <body class="bg-snes-light-gray">
+        <Navbar />
+        <main
+            class="max-w-5xl px-3 mx-auto xl:px-0 pb-5 md:pb-0"
+            id="maincontent"
+        >
+            <slot />
+        </main>
+    </body>
 </html>

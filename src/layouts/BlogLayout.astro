@@ -1,27 +1,27 @@
 ---
 interface Props {
-  title: string;
-  description: string;
+    title: string;
+    description: string;
 }
 
-import Meta from "../components/Meta.astro";
-import Navbar from "../components/Navbar.astro";
+import Meta from "@components/Meta.astro";
+import Navbar from "@components/Navbar.astro";
 const { title, description } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en" class="font-sans" dir="ltr">
-  <Meta title={title} description={description} />
-  <body>
-    <Navbar />
-    <main class="max-w-5xl px-3 mx-auto xl:px-0" id="maincontent">
-      <h1 class="mt-4 mb-1 text-4xl font-bold">
-        {title}
-      </h1>
-      <p class="mb-4 text-gray-500">{description}</p>
-      <div class="pb-6 prose max-w-none">
-        <slot />
-      </div>
-    </main>
-  </body>
+    <Meta title={title} description={description} />
+    <body>
+        <Navbar />
+        <main class="max-w-5xl px-3 mx-auto xl:px-0" id="maincontent">
+            <h1 class="mt-4 mb-1 text-4xl font-bold">
+                {title}
+            </h1>
+            <p class="mb-4 text-gray-500">{description}</p>
+            <div class="pb-6 prose max-w-none">
+                <slot />
+            </div>
+        </main>
+    </body>
 </html>

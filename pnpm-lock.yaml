@@ -26,7 +26,7 @@ importers:
     devDependencies:
       '@iconify-json/lucide':
         specifier: ^1.1.208
-        version: 1.1.208
+        version: 1.2.1
       '@unocss/reset':
         specifier: ^0.62.2
         version: 0.62.3
@@ -536,8 +536,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@iconify-json/lucide@1.1.208':
-    resolution: {integrity: sha512-wdlljQKeoqmIw3YcYMCObPvuB3Gc0vbb0tocULrb0isl7wqINlHmcCAbL2mtLbHmwbldtW25AsplB6H56njPoA==}
+  '@iconify-json/lucide@1.2.1':
+    resolution: {integrity: sha512-papXuksFsPmrfQTfUKH09N9XX2dsKSp5cdMYolV2hqP/JLL5yzsBGmn1P4eCqB1FwU+oTyh44zFS410yP530fQ==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -909,9 +909,6 @@ packages:
 
   '@unocss/preset-wind@0.62.3':
     resolution: {integrity: sha512-6+VNce1he1U5EXKlXRwTIPn8KeK6bZ2jAEgcCxk8mFy8SzOlLeYzXCI9lcdiWRTjIeIiK5iSaUqmsQFtKdTyQg==}
-
-  '@unocss/reset@0.62.2':
-    resolution: {integrity: sha512-5hgxcBMMbw5tMSSd4kUX70H0pZK9SwRHtm8Q4VvDV6xOZJa2/fvFR4qyxbuAM9nhOwYUqAAX23lxfmY0bXX73A==}
 
   '@unocss/reset@0.62.3':
     resolution: {integrity: sha512-XVKPkbm8y9SGzRaG3x+HygGZURm50MvKLVHXsbxi67RbIir9Ouyt9hQTV6Xs3RicRZFWOpJx3wMRb8iKUOe5Zw==}
@@ -2864,7 +2861,7 @@ snapshots:
   '@esbuild/win32-x64@0.23.1':
     optional: true
 
-  '@iconify-json/lucide@1.1.208':
+  '@iconify-json/lucide@1.2.1':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -3272,8 +3269,6 @@ snapshots:
       '@unocss/core': 0.62.3
       '@unocss/preset-mini': 0.62.3
       '@unocss/rule-utils': 0.62.3
-
-  '@unocss/reset@0.62.2': {}
 
   '@unocss/reset@0.62.3': {}
 

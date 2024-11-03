@@ -10,9 +10,10 @@
   "packageRules": [
     {
       "matchUpdateTypes": ["minor"],
-      "automerge": true
     }
   ],
+  dependencyDashboardApproval: false,
+  minimumReleaseAge: "0",
   "lockFileMaintenance": {
     "enabled": true
   }

@@ -7,18 +7,13 @@
   prHourlyLimit: 5,
   platform: "github",
   repositories: ["nulfrost/dane.computer"],
-  packageRules: [
+  "packageRules": [
     {
-      description: "lockFileMaintenance",
-      matchUpdateTypes: [
-        "pin",
-        "digest",
-        "patch",
-        "minor",
-        "lockFileMaintenance",
-      ],
-      dependencyDashboardApproval: false,
-      minimumReleaseAge: "0",
-    },
+      "matchUpdateTypes": ["minor"],
+      "automerge": true
+    }
   ],
+  "lockFileMaintenance": {
+    "enabled": true
+  }
 }

@@ -27,6 +27,9 @@ importers:
       '@iconify-json/lucide':
         specifier: ^1.1.208
         version: 1.1.208
+      '@iconify-json/tabler':
+        specifier: ^1.2.7
+        version: 1.2.7
       '@unocss/reset':
         specifier: ^0.62.2
         version: 0.62.2
@@ -682,6 +685,9 @@ packages:
 
   '@iconify-json/lucide@1.1.208':
     resolution: {integrity: sha512-wdlljQKeoqmIw3YcYMCObPvuB3Gc0vbb0tocULrb0isl7wqINlHmcCAbL2mtLbHmwbldtW25AsplB6H56njPoA==}
+
+  '@iconify-json/tabler@1.2.7':
+    resolution: {integrity: sha512-q6FbDeC5caOC7i7/dcJOv7PdovHWItd84hCvsnlD/mzsrl5Nhol6eSQOMRv1bIpyxykGEiSDbOsVK5f23j/aFg==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -3110,6 +3116,10 @@ snapshots:
     optional: true
 
   '@iconify-json/lucide@1.1.208':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/tabler@1.2.7':
     dependencies:
       '@iconify/types': 2.0.0
 

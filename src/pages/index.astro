@@ -21,17 +21,17 @@ const posts = (await getCollection("blog"))
     <div class="mb-4 grid xl:grid-cols-2 gap-4">
         <div>
             <div>
-                <Image
-                    src={daneImage}
+                <img
+                    src={daneImage.src}
+                    height="384px"
+                    width="288px"
                     alt="Dane staring down at his camera while on a boat"
-                    format="avif"
-                    quality={80}
-                    class="h-full w-sm rounded-lg border border-gray-300 mb-2"
+                    class="h-full w-sm rounded-lg border border-gray-300 mb-2 h-[288px] w-[384px]"
                 />
             </div>
             <div>
                 <p>He/They</p>
-                <p>29 years old</p>
+                <p>30 years old</p>
                 <p>Toronto, ONTARIO, Canada</p>
             </div>
         </div>

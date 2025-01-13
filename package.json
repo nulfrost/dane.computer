@@ -28,7 +28,7 @@
     "@iconify-json/tabler": "^1.2.7",
     "@unocss/reset": "^0.62.2",
     "detect-libc": "^2.0.3",
-    "unocss": "^0.62.2",
+    "unocss": "^65.0.0",
     "@cloudflare/workers-types": "^4.20241106.0",
     "wrangler": "^3.85.0"
   }

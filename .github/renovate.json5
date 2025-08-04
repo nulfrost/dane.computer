@@ -1,20 +1,16 @@
 {
-  branchPrefix: "maintenance/",
-  username: "renovate-release",
-  gitAuthor: "Renovate Bot <bot@renovateapp.com>",
-  onboarding: false,
-  prConcurrentLimit: 0,
-  prHourlyLimit: 5,
-  platform: "github",
-  repositories: ["nulfrost/dane.computer"],
+  "extends": ["config:base"],
+  "branchPrefix": "maintenance/",
+  "username": "renovate-release",
+  "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
+  "onboarding": false,
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 5,
+  "dependencyDashboardApproval": false,
+  "minimumReleaseAge": "0",
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor"],
+      "matchUpdateTypes": ["minor", "patch"]
     }
-  ],
-  dependencyDashboardApproval: false,
-  minimumReleaseAge: "0",
-  "lockFileMaintenance": {
-    "enabled": true
-  }
+  ]
 }

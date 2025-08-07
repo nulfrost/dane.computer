@@ -1,25 +1,25 @@
 ---
 import BlogLayout from "@layouts/BlogLayout.astro";
-import {
-    type CollectionEntry,
-    getCollection,
-    getEntry,
-    render,
-} from "astro:content";
+import { render } from "astro:content";
+import { type CollectionEntry, getCollection, getEntry } from "astro:content";
 
 export async function getStaticPaths() {
-    const posts = await getCollection("blog");
-    return posts.map((post) => ({
-        params: { blog: post.id },
-        props: post,
-    }));
+	const documents = await getCollection("documents");
+	return documents.map((document) => ({
+		params: { blog: document.id },
+		props: document,
+	}));
 }
 
-type Props = CollectionEntry<"blog">;
+type Props = CollectionEntry<"documents">;
 
-const post = await getEntry("blog", Astro.params.blog);
+const document = await getEntry("documents", Astro.params.blog);
 
-const { Content } = await render(post);
+if (!document) {
+	return Astro.rewrite("/404");
+}
+
+const { Content } = await render(document);
 ---
 
 <script>
@@ -49,7 +49,7 @@ const { Content } = await render(post);
     });
 </script>
 
-<BlogLayout {...post!.data}>
+<BlogLayout {...document!.data}>
     <Content />
 </BlogLayout>
 

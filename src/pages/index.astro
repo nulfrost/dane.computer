@@ -1,16 +1,10 @@
 ---
-import { Image } from "astro:assets";
 import daneImage from "../images/dane.png";
 import Layout from "@layouts/Layout.astro";
 import Link from "@components/Link.astro";
 
 import { getCollection } from "astro:content";
-
-const posts = (await getCollection("blog"))
-    .sort(
-        (a, b) => b.data.published_at.valueOf() - a.data.published_at.valueOf(),
-    )
-    .slice(0, 4);
+const documents = await getCollection("documents");
 ---
 
 <Layout
@@ -39,12 +33,12 @@ const posts = (await getCollection("blog"))
             <h2 class="font-bold mb-1">Dane&apos;s latest blog entires</h2>
             <ul>
                 {
-                    posts.map((post) => (
+                    documents.map((document) => (
                         <li class="mb-2">
                             <p class="mb-0 max-w-[60ch]">
-                                {post.data.title}
+                                {document.data.title}
                                 <Link
-                                    href={`/blogs/${post.id}`}
+                                    href={`/blogs/${document.id}`}
                                     extraClasses="text-sm font-bold ml-1"
                                 >
                                     (view more)
@@ -53,10 +47,10 @@ const posts = (await getCollection("blog"))
                             <span class="text-gray-500 text-sm">
                                 posted on{" "}
                                 <time
-                                    datetime={post.data.published_at.toISOString()}
+                                    datetime={document.data.publishedAt}
                                 >
                                     {new Intl.DateTimeFormat("en-US").format(
-                                        new Date(post.data.published_at),
+                                        new Date(document.data.publishedAt),
                                     )}
                                 </time>
                             </span>

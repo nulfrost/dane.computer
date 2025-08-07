@@ -1,35 +1,46 @@
 {
-  "name": "danethe.dev-astro",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro build && wrangler dev",
-    "astro": "astro",
-    "deploy": "astro build && wrangler deploy",
-    "cf-typegen": "wrangler types"
-  },
-  "dependencies": {
-    "@astrojs/cloudflare": "^12.6.2",
-    "@astrojs/mdx": "^4.3.3",
-    "@astrojs/sitemap": "latest",
-    "@astrojs/check": "^0.9.4",
-    "astro": "^5.12.8",
-    "sharp": "^0.34.3",
-    "typescript": "^5.9.2"
-  },
-  "trustedDependencies": [
-    "sharp"
-  ],
-  "devDependencies": {
-    "@iconify-json/lucide": "^1.2.60",
-    "@iconify-json/tabler": "^1.2.20",
-    "@unocss/reset": "^66.4.1",
-    "detect-libc": "^2.0.4",
-    "unocss": "^66.4.1",
-    "@cloudflare/workers-types": "^4.20250803.0",
-    "wrangler": "^4.27.0"
-  }
+	"name": "danethe.dev-astro",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro check && astro build",
+		"preview": "astro build && wrangler dev",
+		"astro": "astro",
+		"deploy": "astro build && wrangler deploy",
+		"lex-gen": "rm -rf ./src/__generated__ && lex gen-api ./src/__generated__/lexicons ./lexicons/pub/leaflet/* ./lexicons/pub/leaflet/*/* ./lexicons/com/atproto/*/* --yes",
+		"cf-typegen": "wrangler types"
+	},
+	"dependencies": {
+		"@astrojs/check": "^0.9.4",
+		"@astrojs/cloudflare": "^12.6.2",
+		"@astrojs/mdx": "^4.3.3",
+		"@astrojs/sitemap": "latest",
+		"@atproto/api": "^0.16.0",
+		"@atproto/syntax": "^0.4.0",
+		"@atproto/xrpc": "^0.7.1",
+		"@nulfrost/leaflet-loader-astro": "^1.0.0",
+		"astro": "^5.12.8",
+		"multiformats": "^13.3.7",
+		"sanitize-html": "^2.17.0",
+		"sharp": "^0.34.3",
+		"typescript": "^5.9.2"
+	},
+	"trustedDependencies": [
+		"sharp"
+	],
+	"devDependencies": {
+		"@atproto/lex-cli": "^0.9.1",
+		"@atproto/lexicon": "^0.4.12",
+		"@cloudflare/workers-types": "^4.20250803.0",
+		"@iconify-json/lucide": "^1.2.60",
+		"@iconify-json/tabler": "^1.2.20",
+		"@types/sanitize-html": "^2.16.0",
+		"@unocss/reset": "^66.4.1",
+		"detect-libc": "^2.0.4",
+		"tsx": "^4.20.3",
+		"unocss": "^66.4.1",
+		"wrangler": "^4.27.0"
+	}
 }

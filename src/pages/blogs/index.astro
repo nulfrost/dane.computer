@@ -3,9 +3,11 @@ import Layout from "@layouts/Layout.astro";
 import BlogPost from "@components/BlogPost.astro";
 import { getCollection } from "astro:content";
 
-const posts = (await getCollection("blog")).sort(
-    (a, b) => b.data.published_at.valueOf() - a.data.published_at.valueOf(),
-);
+// const posts = (await getCollection("blogs")).sort(
+//     (a, b) => b.data.published_at.valueOf() - a.data.published_at.valueOf(),
+// );
+
+const documents = await getCollection("documents");
 ---
 
 <Layout
@@ -15,11 +17,11 @@ const posts = (await getCollection("blog")).sort(
     <h1 class="mt-4 mb-4 text-2xl font-bold text-snes-black">Blog</h1>
     <ul class="space-y-4">
         {
-            posts.map((post) => (
+            documents.map((document) => (
                 <BlogPost
-                    title={post.data.title}
-                    slug={post.id}
-                    published_at={post.data.published_at}
+                    title={document.data.title}
+                    slug={document.id}
+                    publishedAt={document.data.publishedAt}
                 />
             ))
         }

@@ -5,6 +5,7 @@ import Link from "@components/Link.astro";
 
 import { getCollection } from "astro:content";
 const documents = await getCollection("documents");
+const blogs = await getCollection("blogs");
 ---
 
 <Layout

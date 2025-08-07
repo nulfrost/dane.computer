@@ -1,11 +1,11 @@
 ---
 interface Props {
-    title: string;
-    published_at: Date;
-    slug: string;
+	title: string;
+	publishedAt: string;
+	slug: string;
 }
 
-const { title, published_at, slug } = Astro.props;
+const { title, publishedAt, slug } = Astro.props;
 import Link from "@components/Link.astro";
 ---
 
@@ -17,11 +17,11 @@ import Link from "@components/Link.astro";
             <Link href={`/blogs/${slug}`}>{title}</Link>
         </h2>
         <footer class="text-sm text-gray-500">
-            <time datetime={published_at.toISOString()}>
+            <time datetime={publishedAt}>
                 {
                     new Intl.DateTimeFormat("en-us", {
                         dateStyle: "medium",
-                    }).format(new Date(published_at))
+                    }).format(new Date(publishedAt))
                 }
             </time>
         </footer>

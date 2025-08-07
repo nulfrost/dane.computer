@@ -1,25 +1,42 @@
 ---
 import BlogLayout from "@layouts/BlogLayout.astro";
 import { render } from "astro:content";
-import { type CollectionEntry, getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, type CollectionEntry } from "astro:content";
+
+export const prerender = true;
 
 export async function getStaticPaths() {
 	const documents = await getCollection("documents");
-	return documents.map((document) => ({
-		params: { blog: document.id },
-		props: document,
-	}));
+	const blogs = await getCollection("blogs");
+
+	// Combine both collections for static paths
+	const allPosts = [
+		...documents.map((document) => ({
+			params: { blog: document.id },
+			props: { collection: "documents" },
+		})),
+		...blogs.map((blog) => ({
+			params: { blog: blog.id },
+			props: { collection: "blogs" },
+		})),
+	];
+
+	return allPosts;
 }
 
-type Props = CollectionEntry<"documents">;
+// Try to get the entry from both collections
+let entry: CollectionEntry<"documents"> | CollectionEntry<"blogs"> | undefined =
+	await getEntry("documents", Astro.params.blog);
 
-const document = await getEntry("documents", Astro.params.blog);
+if (!entry) {
+	entry = await getEntry("blogs", Astro.params.blog);
+}
 
-if (!document) {
+if (!entry) {
 	return Astro.rewrite("/404");
 }
 
-const { Content } = await render(document);
+const { Content } = await render(entry);
 ---
 
 <script>
@@ -49,7 +66,7 @@ const { Content } = await render(document);
     });
 </script>
 
-<BlogLayout {...document!.data}>
+<BlogLayout {...entry!.data}>
     <Content />
 </BlogLayout>
 

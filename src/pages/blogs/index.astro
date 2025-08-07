@@ -3,11 +3,28 @@ import Layout from "@layouts/Layout.astro";
 import BlogPost from "@components/BlogPost.astro";
 import { getCollection } from "astro:content";
 
-// const posts = (await getCollection("blogs")).sort(
-//     (a, b) => b.data.published_at.valueOf() - a.data.published_at.valueOf(),
-// );
-
+const blogs = await getCollection("blogs");
 const documents = await getCollection("documents");
+
+// Combine both collections and sort by publishedAt
+const allPosts = [
+	...blogs.map((blog) => ({
+		...blog,
+		data: {
+			...blog.data,
+			// Ensure publishedAt is a Date object for consistent sorting
+			publishedAt: new Date(blog.data.publishedAt),
+		},
+	})),
+	...documents.map((document) => ({
+		...document,
+		data: {
+			...document.data,
+			// Ensure publishedAt is a Date object for consistent sorting
+			publishedAt: new Date(document.data.publishedAt),
+		},
+	})),
+].sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
 ---
 
 <Layout
@@ -17,11 +34,11 @@ const documents = await getCollection("documents");
     <h1 class="mt-4 mb-4 text-2xl font-bold text-snes-black">Blog</h1>
     <ul class="space-y-4">
         {
-            documents.map((document) => (
+            allPosts.map((post) => (
                 <BlogPost
-                    title={document.data.title}
-                    slug={document.id}
-                    publishedAt={document.data.publishedAt}
+                    title={post.data.title}
+                    slug={post.id}
+                    publishedAt={post.data.publishedAt.toISOString()}
                 />
             ))
         }

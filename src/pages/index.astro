@@ -6,6 +6,26 @@ import Link from "@components/Link.astro";
 import { getCollection } from "astro:content";
 const documents = await getCollection("documents");
 const blogs = await getCollection("blogs");
+
+// Combine both collections and sort by publishedAt
+const allPosts = [
+	...blogs.map((blog) => ({
+		...blog,
+		data: {
+			...blog.data,
+			publishedAt: new Date(blog.data.publishedAt),
+		},
+	})),
+	...documents.map((document) => ({
+		...document,
+		data: {
+			...document.data,
+			publishedAt: new Date(document.data.publishedAt),
+		},
+	})),
+]
+	.sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+	.slice(0, 5); // Show only the 5 most recent
 ---
 
 <Layout
@@ -31,15 +51,15 @@ const blogs = await getCollection("blogs");
             </div>
         </div>
         <div>
-            <h2 class="font-bold mb-1">Dane&apos;s latest blog entires</h2>
+            <h2 class="font-bold mb-1">Dane&apos;s latest blog entries</h2>
             <ul>
                 {
-                    documents.map((document) => (
+                    allPosts.map((post) => (
                         <li class="mb-2">
                             <p class="mb-0 max-w-[60ch]">
-                                {document.data.title}
+                                {post.data.title}
                                 <Link
-                                    href={`/blogs/${document.id}`}
+                                    href={`/blogs/${post.id}`}
                                     extraClasses="text-sm font-bold ml-1"
                                 >
                                     (view more)
@@ -48,10 +68,10 @@ const blogs = await getCollection("blogs");
                             <span class="text-gray-500 text-sm">
                                 posted on{" "}
                                 <time
-                                    datetime={document.data.publishedAt}
+                                    datetime={post.data.publishedAt.toISOString()}
                                 >
                                     {new Intl.DateTimeFormat("en-US").format(
-                                        new Date(document.data.publishedAt),
+                                        post.data.publishedAt,
                                     )}
                                 </time>
                             </span>

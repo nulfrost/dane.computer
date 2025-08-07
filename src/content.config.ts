@@ -7,8 +7,17 @@ const blogs = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
-		year: z.number(),
-		published_at: z.date(),
+		publishedAt: z.union([z.date(), z.string()]).transform((val) => {
+			if (val instanceof Date) return val;
+			return new Date(val);
+		}),
+		publication: z.string().optional(),
+		author: z.string().optional(),
+		// Optional fields to match documents structure
+		rkey: z.string().optional(),
+		cid: z.string().optional(),
+		// Keep year for backward compatibility if needed
+		year: z.number().optional(),
 	}),
 });
 
